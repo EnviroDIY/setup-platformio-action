@@ -8,13 +8,13 @@ This actions sets up PlatformIO for use in actions.
 ### Use newest PlatformIO version
 ```yaml
 - name: Setup PlatformIO
-  uses: EnviroDIY/setup-platformio-action@v1
+  uses: EnviroDIY/setup-platformio-action@v1.0.2
 ```
 
 ### Specify the version of PlatformIO you want to use
 ```yaml
 - name: Setup PlatformIO
-  uses: EnviroDIY/setup-platformio-action@v1
+  uses: EnviroDIY/setup-platformio-action@v1.0.2
   with:
     platformio-version: "6.1"
 ```
@@ -43,7 +43,7 @@ jobs:
 
       # Setup PlatformIO in PATH
       - name: Setup PlatformIO
-        uses: EnviroDIY/setup-platformio-action@v1
+        uses: EnviroDIY/setup-platformio-action@v1.0.2
 
       # Build the PlatformIO project
       - name: Build PlatformIO project
