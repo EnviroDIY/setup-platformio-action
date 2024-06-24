@@ -2,17 +2,31 @@ name: "Setup PlatformIO"
 description: "Set up platformIO in your GitHub Actions workflow"
 inputs:
   platformio-version:
-    description: "PlatformIO version to use. (e.g. 5.2.5, 5.2 or 5"
+    description: "PlatformIO version to use. (e.g. 6.1.11, 6.1 or 6)"
     default: "newest"
-    
+
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-python@v2
-    - run: pip install platformio
+    - name: Write the requirements file
+      shell: bash
+      run: |
+        echo "wheel" > requirements.txt
+        echo "platformio" >> requirements.txt
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+        cache: 'pip'
+
+    - name: Install Latest PlatformIO
+      run: pip install -U platformio
       shell: bash
       if: ${{ inputs.platformio-version == 'newest' }}
-    - run: pip install platformio==${{ inputs.platformio-version }}
+
+    - name: Install specified PlatformIO
+      run: pip install platformio==${{ inputs.platformio-version }}
       shell: bash
       if: ${{ inputs.platformio-version != 'newest' }}
 
